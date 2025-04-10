@@ -105,7 +105,7 @@ void handleMenu(Matrix<T>& mat1, Matrix<T>& mat2) {
             }
         } else if (choice == 5) {
             int matChoice;
-            size_t r1, r2;
+            size_t r1, r2; 
             std::cout << "Select matrix (1 or 2): ";
             std::cin >> matChoice;
             std::cout << "Enter two row indices: ";
