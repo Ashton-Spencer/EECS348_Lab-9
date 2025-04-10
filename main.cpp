@@ -25,9 +25,9 @@ void readMatricesFromFile(const std::string& fileName, Matrix<T>& mat1, Matrix<T
     if (!file) {
         throw std::runtime_error("Error opening file.");
     }
-    int n;
-    mat1 = Matrix<T>(n);
-    mat2 = Matrix<T>(n);
+    int type_flag;
+    size_t n;
+    file >> n >> type_flag;
     for (size_t i = 0; i < n; ++i) {
         for (size_t j = 0; j < n; ++j) {
             T val;
@@ -44,27 +44,75 @@ void readMatricesFromFile(const std::string& fileName, Matrix<T>& mat1, Matrix<T
     }
     std::cout << "Matrix 1:\n";
     mat1.print_matrix();
+    std::cout << "" << std::endl;
     std::cout << "Matrix 2:\n";
     mat2.print_matrix();
+    std::cout << "" << std::endl;
 }
 
 int main() {
     std::string fileName;
     std::cout << "Enter initial file name: ";
     std::cin >> fileName;
-    std::ifstream testFile(fileName);
-    if (!testFile) throw std::runtime_error("File not found.");
+    std::ifstream inFile(fileName);
+    if (!inFile) throw std::runtime_error("File not found.");
     int type_flag;
     size_t n;
-    testFile >> n >> type_flag;
-    testFile.close();
+    inFile >> n >> type_flag;
     if (type_flag == 0) {
-        Matrix<int> mat1(1), mat2(1);
-        readMatricesFromFile(fileName, mat1, mat2);
+        Matrix<int> mat1(n), mat2(n);
+        if (!inFile) {
+            throw std::runtime_error("Error opening file.");
+        }
+        size_t n = mat1.get_size();
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                int val;
+                inFile >> val;
+                mat1.set_value(i, j, val);
+            }
+        }
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                int val;
+                inFile >> val;
+                mat2.set_value(i, j, val);
+            }
+        }
+        std::cout << "Matrix 1:\n";
+        mat1.print_matrix();
+        std::cout << "" << std::endl;
+        std::cout << "Matrix 2:\n";
+        mat2.print_matrix();
+        std::cout << "" << std::endl;
+        inFile.close();
         handleMenu(mat1, mat2);
     } else {
-        Matrix<double> mat1(1), mat2(1);
-        readMatricesFromFile(fileName, mat1, mat2);
+        Matrix<double> mat1(n), mat2(n);
+        std::ifstream file(fileName);
+        if (!file) {
+            throw std::runtime_error("Error opening file.");
+        }
+        size_t n = mat1.get_size();
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                double val;
+                file >> val;
+                mat1.set_value(i, j, val);
+            }
+        }
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                double val;
+                file >> val;
+                mat2.set_value(i, j, val);
+            }
+        }
+        std::cout << "Matrix 1:\n";
+        mat1.print_matrix();
+        std::cout << "Matrix 2:\n";
+        mat2.print_matrix();
+        inFile.close();
         handleMenu(mat1, mat2);
     }
     return 0;
