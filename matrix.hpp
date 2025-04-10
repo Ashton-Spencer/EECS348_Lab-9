@@ -101,7 +101,7 @@ public:
     }
 
     void print_matrix() const {
-        for (const auto& row : nums) {
+        for (const auto& row : data) {
             for (int val : row) {
                 std::cout << val << " ";
             }
