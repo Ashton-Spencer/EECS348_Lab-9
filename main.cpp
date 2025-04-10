@@ -25,7 +25,7 @@ void readMatricesFromFile(const std::string& fileName, Matrix<T>& mat1, Matrix<T
     if (!file) {
         throw std::runtime_error("Error opening file.");
     }
-    size_t n;
+    int n;
     mat1 = Matrix<T>(n);
     mat2 = Matrix<T>(n);
     for (size_t i = 0; i < n; ++i) {

@@ -10,7 +10,7 @@
 template <typename T>
 class Matrix {
 public:
-    Matrix(std::size_t N) : size(N), data(N, std::vector<T>(N)) {}
+    Matrix(int N) : size(N), data(N, std::vector<T>(N)) {}
 
     Matrix(std::vector<std::vector<T>> nums) : data(nums), size(nums.size()) {
         for (const auto& row : nums) {
