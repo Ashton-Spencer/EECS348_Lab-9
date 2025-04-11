@@ -55,15 +55,11 @@ int main() {
     std::cout << "Enter initial file name: ";
     std::cin >> fileName;
     std::ifstream inFile(fileName);
-    if (!inFile) throw std::runtime_error("File not found.");
     int type_flag;
     size_t n;
     inFile >> n >> type_flag;
     if (type_flag == 0) {
         Matrix<int> mat1(n), mat2(n);
-        if (!inFile) {
-            throw std::runtime_error("Error opening file.");
-        }
         size_t n = mat1.get_size();
         for (size_t i = 0; i < n; ++i) {
             for (size_t j = 0; j < n; ++j) {
@@ -89,22 +85,18 @@ int main() {
         handleMenu(mat1, mat2);
     } else {
         Matrix<double> mat1(n), mat2(n);
-        std::ifstream file(fileName);
-        if (!file) {
-            throw std::runtime_error("Error opening file.");
-        }
         size_t n = mat1.get_size();
         for (size_t i = 0; i < n; ++i) {
             for (size_t j = 0; j < n; ++j) {
                 double val;
-                file >> val;
+                inFile >> val;
                 mat1.set_value(i, j, val);
             }
         }
         for (size_t i = 0; i < n; ++i) {
             for (size_t j = 0; j < n; ++j) {
                 double val;
-                file >> val;
+                inFile >> val;
                 mat2.set_value(i, j, val);
             }
         }
